@@ -1,19 +1,24 @@
-//
-//  ViewController.swift
-//  UiTableView
-//
-//  Created by Luis Diaz on 19/08/2023.
-//
-
 import UIKit
 
+struct Device {
+    let title: String
+    let imageName: String
+}
+
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    private var dataSource: TableViewDataSource?
+    private var delegate: TableViewDelegate?
+    
+    override func loadView() {
+        let tableView = UITableView()
+        self.dataSource = TableViewDataSource(dataSource: allDevices)
+        self.delegate = TableViewDelegate()
+        tableView.dataSource = dataSource
+        tableView.delegate = delegate
+        tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
+        view = tableView
+        
     }
-
-
+    
 }
 
